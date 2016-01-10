@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="personalPage">
+
+<head>
+
+  <title>Pentatonics</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../css/bootstrap.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+  <script type="text/javascript" src="../js/main.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript" src="../js/bootstrap.js"></script>
+  <script type="text/javascript" src="../js/navbar.js"></script>
+  <script type="text/javascript" src="../js/querycontroller.js"></script>
+  <script type="text/javascript" src="../js/filters.js"></script>
+  <script type="text/javascript" src="../js/services.js"></script>
+  <script type="text/javascript" src="../js/checklistModel.js"></script>
+  <script type="text/javascript" src="../js/geotagging.js"></script>
+  <script src="../js/ng-google-chart.js"></script>
+
+
+
+</head>
+
+
+<body ng-controller="mainController as main" style="max-width:100%;min-width:100%">
+  <nav class="navbar navbar-default navbar-top" style="z-index: 100;">
+    <div class="container-fluid">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapseButton" aria-expanded="false">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#" ng-click="main.reload_page()">Pentatonics</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="collapseButton">
+        <!--Left Tabs-->
+        <ul class="nav navbar-nav" ng-controller="navLeftController as navLeftCtrl">
+          <li ng-class="{active:navLeftCtrl.isSet(leftTabs.id)}" ng-repeat="leftTabs in navLeftCtrl.tabsLeft"><a data-ng-attr-data-toggle="{{main.attrShow('collapse')}}" data-ng-attr-data-target="{{main.attrShow('.navbar-collapse')}}"
+            href="#" ng-click="navLeftCtrl.setTab(leftTabs.id)">{{leftTabs.name}}</a></li>
+        </ul>
+        <!--Right Tabs-->
+        <ul class="nav navbar-nav navbar-right" ng-controller="navRightController as navRightCtrl">
+          <li ng-repeat="rightTabs in navRightCtrl.tabsRight">
+            <a target="blank" data-toggle="collapse" data-target=".navbar-collapse" href="{{rightTabs.url}}"><img ng-src="{{rightTabs.img_url}}" height="25px" alt="{{rightTabs.name}}" align="middle">
+            </a>
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+  <div id="Content" ng-controller="ContentController as contentCtrl" style="height:100vh;margin-top:2%">
+    <div ng-include="contentCtrl.currentTab.url" ng-init="contentCtrl.currentTab.url=main.firstPage">
+    </div>
+  </div>
+
+
+
+</body>
+
+</html>
